@@ -1,0 +1,232 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Account {
+  id                 Int       @id @default(autoincrement())
+  compoundId         String    @unique @map(name: "compound_id")
+  userId             Int       @map(name: "user_id")
+  providerType       String    @map(name: "provider_type")
+  providerId         String    @map(name: "provider_id")
+  providerAccountId  String    @map(name: "provider_account_id")
+  refreshToken       String?   @map(name: "refresh_token")
+  accessToken        String?   @map(name: "access_token")
+  accessTokenExpires DateTime? @map(name: "access_token_expires")
+  createdAt          DateTime  @default(now()) @map(name: "created_at")
+  updatedAt          DateTime  @default(now()) @map(name: "updated_at")
+
+
+  Profile Profile[]
+  @@index([providerAccountId], name: "providerAccountId")
+  @@index([providerId], name: "providerId")
+  @@index([userId], name: "userId")
+  @@map(name: "accounts")
+}
+
+model Session {
+  id           Int      @id @default(autoincrement())
+  userId       Int      @map(name: "user_id")
+  expires      DateTime
+  sessionToken String   @unique @map(name: "session_token")
+  accessToken  String   @unique @map(name: "access_token")
+  createdAt    DateTime @default(now()) @map(name: "created_at")
+  updatedAt    DateTime @default(now()) @map(name: "updated_at")
+
+  @@map(name: "sessions")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map(name: "email_verified")
+  image         String?
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @default(now()) @map(name: "updated_at")
+
+  @@map(name: "users")
+}
+
+model VerificationRequest {
+  id         Int      @id @default(autoincrement())
+  identifier String
+  token      String   @unique
+  expires    DateTime
+  createdAt  DateTime @default(now()) @map(name: "created_at")
+  updatedAt  DateTime @default(now()) @map(name: "updated_at")
+
+  @@map(name: "verification_requests")
+}
+
+model Name {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  image String
+}
+
+model Profile {
+  id        Int       @id @default(autoincrement())
+  Account   Account?  @relation(fields: [accountId], references: [id])
+  accountId Int?
+  posts     Post[]
+  products  Product[]
+  username  String
+
+  image  String
+  bio    String
+  follow Follow[]
+
+  comments   Comments[]
+  likes      Likes?
+  sales      Sales[]
+  totalsales Int?
+
+
+
+  Reviews   Reviews[]
+  followedBy  Profile[]   @relation("UserFollows", references: [id])
+  following   Profile[]   @relation("UserFollows", references: [id])
+  
+  Follower  Follower[]
+  Following Following[]
+}
+
+
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  profile   Profile? @relation(fields: [profileId], references: [id])
+  profileId Int?
+
+  name     String
+  image    String
+  body     String
+  comments Comments[]
+  likes    Likes[]
+
+
+}
+
+model Product {
+  id        Int          @id @default(autoincrement())
+  profile   Profile?     @relation(fields: [profileId], references: [id])
+  profileId Int?
+  category  Categories[] @relation(references: [id])
+  name      String
+
+  image          String
+  discription    String
+  discount_price Float
+  price          Float
+  reviews        Reviews[]
+  likes          Likes[]
+
+  Cart   Cart?   @relation(fields: [cartId], references: [id])
+  cartId Int?
+  Sales  Sales[]
+}
+
+model Categories {
+  id          Int           @id @default(autoincrement())
+  products    Product[]     @relation(references: [id])
+  subcategory Subcategory[]
+  name        String
+  image       String
+}
+
+model Subcategory {
+  id         Int         @id @default(autoincrement())
+  category   Categories? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
+  name       String
+  image      String
+}
+
+model Cart {
+  id       Int       @id @default(autoincrement())
+  products Product[]
+}
+
+model Comments {
+  id        Int      @id @default(autoincrement())
+  profile   Profile? @relation(fields: [profileId], references: [id])
+  profileId Int?
+  post      Post?    @relation(fields: [postId], references: [id])
+  postId    Int?
+  body      String
+
+}
+
+model Reviews {
+  id        Int      @id @default(autoincrement())
+  profile   Profile? @relation(fields: [profileId], references: [id])
+  profileId Int?
+  product   Product? @relation(fields: [productId], references: [id])
+  productId Int?
+  body      String
+
+}
+
+model Likes {
+  id        Int      @id @default(autoincrement())
+  profile   Profile? @relation(fields: [profileId], references: [id])
+  profileId Int?
+  product   Product? @relation(fields: [productId], references: [id])
+  productId Int?
+  post      Post?    @relation(fields: [postId], references: [id])
+  postId    Int?
+
+}
+
+model Details {
+  id       Int    @id @default(autoincrement())
+  name     String
+  email    String
+  address  String
+  state    String
+  delivery String
+  phone    Int
+}
+
+model Sales {
+  id        Int      @id @default(autoincrement())
+  profile   Profile? @relation(fields: [profileId], references: [id])
+  profileId Int?
+  product   Product? @relation(fields: [productId], references: [id])
+  productId Int?
+  price     Int
+}
+
+model Follow {
+  id          Int       @id @default(autoincrement())
+  follower    Follower  @relation(fields: [followerId], references: [id])
+  followerId  Int
+  following   Following @relation(fields: [followingId], references: [id])
+  followingId Int
+
+  Profile   Profile? @relation(fields: [profileId], references: [id])
+  profileId Int?
+}
+
+model Follower {
+  id        Int      @id @default(autoincrement())
+  profile   Profile? @relation(fields: [profileId], references: [id])
+  profileId Int?
+  Follow    Follow[]
+}
+
+model Following {
+  id        Int      @id @default(autoincrement())
+  profile   Profile? @relation(fields: [profileId], references: [id])
+  profileId Int?
+  Follow    Follow[]
+}

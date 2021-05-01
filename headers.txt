@@ -1,0 +1,70 @@
+import React, { Component } from "react";
+import { StyleSheet, View, Text } from "react-native";
+import EntypoIcon from "react-native-vector-icons/Entypo";
+
+function Untitled5(props) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.loremIpsumRow}>
+        <Text style={styles.loremIpsum}>Lorem Ipsum</Text>
+        <Text style={styles.loremIpsum2}>Lorem Ipsum</Text>
+      </View>
+      <View style={styles.iconRow}>
+        <EntypoIcon name="home" style={styles.icon}></EntypoIcon>
+        <EntypoIcon name="home" style={styles.icon2}></EntypoIcon>
+        <EntypoIcon name="home" style={styles.icon3}></EntypoIcon>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  loremIpsum: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    height: 59,
+    width: 125
+  },
+  loremIpsum2: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    height: 59,
+    width: 125,
+    marginLeft: 98
+  },
+  loremIpsumRow: {
+    height: 59,
+    flexDirection: "row",
+    marginTop: 64,
+    marginLeft: 13,
+    marginRight: 14
+  },
+  icon: {
+    color: "rgba(128,128,128,1)",
+    fontSize: 40,
+    marginTop: 1
+  },
+  icon2: {
+    color: "rgba(128,128,128,1)",
+    fontSize: 40,
+    marginLeft: 115,
+    marginTop: 1
+  },
+  icon3: {
+    color: "rgba(128,128,128,1)",
+    fontSize: 40,
+    marginLeft: 94
+  },
+  iconRow: {
+    height: 45,
+    flexDirection: "row",
+    marginTop: 602,
+    marginLeft: 13,
+    marginRight: 33
+  }
+});
+
+export default Untitled5;

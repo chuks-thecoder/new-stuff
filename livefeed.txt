@@ -1,0 +1,95 @@
+import React, { Component } from "react";
+import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
+
+function Untitled3(props) {
+  return (
+    <View style={styles.container}>
+      <Image
+        source={require("../assets/images/Skincare-rafiki1.png")}
+        resizeMode="contain"
+        style={styles.image}
+      ></Image>
+      <View style={styles.buttonRow}>
+        <TouchableOpacity style={styles.button}></TouchableOpacity>
+        <TouchableOpacity style={styles.button2}></TouchableOpacity>
+      </View>
+      <View style={styles.loremIpsumStack}>
+        <Text style={styles.loremIpsum}>Lorem Ipsum</Text>
+        <Text style={styles.loremIpsum2}>Lorem Ipsum</Text>
+        <Text style={styles.loremIpsum3}>Lorem Ipsum</Text>
+      </View>
+      <TouchableOpacity style={styles.button3}></TouchableOpacity>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  image: {
+    width: 375,
+    height: 356,
+    marginTop: 50
+  },
+  button: {
+    width: 52,
+    height: 24,
+    backgroundColor: "#E6E6E6"
+  },
+  button2: {
+    width: 45,
+    height: 24,
+    backgroundColor: "#E6E6E6",
+    marginLeft: 21
+  },
+  buttonRow: {
+    height: 24,
+    flexDirection: "row",
+    marginLeft: 18,
+    marginRight: 239
+  },
+  loremIpsum: {
+    top: 0,
+    left: 0,
+    position: "absolute",
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    height: 120,
+    width: 347
+  },
+  loremIpsum2: {
+    top: 95,
+    left: 0,
+    position: "absolute",
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    height: 25,
+    width: 95,
+    textDecorationLine: "line-through"
+  },
+  loremIpsum3: {
+    top: 95,
+    left: 118,
+    position: "absolute",
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    height: 25,
+    width: 95
+  },
+  loremIpsumStack: {
+    width: 347,
+    height: 120,
+    marginTop: 26,
+    marginLeft: 18
+  },
+  button3: {
+    width: 73,
+    height: 26,
+    backgroundColor: "#E6E6E6",
+    marginTop: 12,
+    marginLeft: 18
+  }
+});
+
+export default Untitled3;

@@ -1,0 +1,93 @@
+import React, { Component } from "react";
+import {
+  StyleSheet,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Image
+} from "react-native";
+
+function Untitled2(props) {
+  return (
+    <View style={styles.container}>
+      <TextInput
+        placeholder="placeholder"
+        style={styles.placeholder}
+      ></TextInput>
+      <View style={styles.buttonRow}>
+        <TouchableOpacity style={styles.button}></TouchableOpacity>
+        <TouchableOpacity style={styles.button2}></TouchableOpacity>
+        <TouchableOpacity style={styles.button3}></TouchableOpacity>
+        <TouchableOpacity style={styles.button4}></TouchableOpacity>
+      </View>
+      <Image
+        source={require("../assets/images/Skincare-rafiki.png")}
+        resizeMode="contain"
+        style={styles.image}
+      ></Image>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  placeholder: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    height: 46,
+    width: 351,
+    borderWidth: 1,
+    borderColor: "#000000",
+    borderRadius: 33,
+    shadowColor: "rgba(0,0,0,1)",
+    shadowOffset: {
+      height: -17,
+      width: -6
+    },
+    elevation: -27,
+    shadowOpacity: 0.21,
+    shadowRadius: -9,
+    marginTop: 51,
+    marginLeft: 12
+  },
+  button: {
+    width: 73,
+    height: 33,
+    backgroundColor: "#E6E6E6"
+  },
+  button2: {
+    width: 74,
+    height: 33,
+    backgroundColor: "#E6E6E6",
+    marginLeft: 14
+  },
+  button3: {
+    width: 74,
+    height: 33,
+    backgroundColor: "#E6E6E6",
+    marginLeft: 24
+  },
+  button4: {
+    width: 74,
+    height: 33,
+    backgroundColor: "#E6E6E6",
+    marginLeft: 16
+  },
+  buttonRow: {
+    height: 33,
+    flexDirection: "row",
+    marginTop: 10,
+    marginLeft: 14,
+    marginRight: 12
+  },
+  image: {
+    width: 174,
+    height: 206,
+    marginTop: 38,
+    marginLeft: 14
+  }
+});
+
+export default Untitled2;

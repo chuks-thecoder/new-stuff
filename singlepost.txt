@@ -1,0 +1,83 @@
+import React, { Component } from "react";
+import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+
+function Untitled1(props) {
+  return (
+    <View style={styles.container}>
+      <Image
+        source={require("../assets/images/Manicurist-cuate.png")}
+        resizeMode="contain"
+        style={styles.image}
+      ></Image>
+      <Text style={styles.loremIpsum}>Lorem Ipsum</Text>
+      <View style={styles.rect}></View>
+      <View style={styles.buttonRow}>
+        <TouchableOpacity style={styles.button}></TouchableOpacity>
+        <Text style={styles.loremIpsum3}>Lorem Ipsum</Text>
+        <TouchableOpacity style={styles.button2}></TouchableOpacity>
+        <TouchableOpacity style={styles.button3}></TouchableOpacity>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  image: {
+    width: 375,
+    height: 355,
+    marginTop: 94,
+    alignSelf: "center"
+  },
+  loremIpsum: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    height: 123,
+    width: 341,
+    fontSize: 20,
+    marginTop: 45,
+    marginLeft: 17
+  },
+  rect: {
+    width: 75,
+    height: 24,
+    backgroundColor: "#E6E6E6",
+    marginTop: -157,
+    marginLeft: 17
+  },
+  button: {
+    width: 67,
+    height: 21,
+    backgroundColor: "#E6E6E6"
+  },
+  loremIpsum3: {
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    height: 21,
+    width: 89,
+    marginLeft: 7
+  },
+  button2: {
+    width: 44,
+    height: 29,
+    backgroundColor: "#E6E6E6",
+    marginLeft: 77
+  },
+  button3: {
+    width: 38,
+    height: 29,
+    backgroundColor: "#E6E6E6",
+    marginLeft: 11
+  },
+  buttonRow: {
+    height: 29,
+    flexDirection: "row",
+    marginTop: 133,
+    marginLeft: 25,
+    marginRight: 17
+  }
+});
+
+export default Untitled1;
